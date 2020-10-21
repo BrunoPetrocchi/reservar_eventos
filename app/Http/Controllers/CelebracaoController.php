@@ -14,10 +14,18 @@ class CelebracaoController extends Controller
     
     public function index()
     {
-        $pessoa = Pessoa::all();
-        $celebracao = Celebracao::all();
-    
         
+        $celebracao = Celebracao::all();
+      
+        $pessoa = DB::table('pessoas')  
+         ->select(DB::raw('count(pessoas.celebracao_id) as celeb,
+         pessoas.celebracao_id, celebracaos.id '))
+         ->join('celebracaos', 'pessoas.celebracao_id', '=', 'celebracaos.id')
+         ->groupBy('pessoas.celebracao_id')  
+         ->get();
+      
+        
+       // echo '<pre>';  print_r ($pessoa); echo '</pre>';
         return view('index', compact('celebracao','pessoa'));
     }
 

@@ -44,6 +44,9 @@ class PessoasController extends Controller
         $pessoa = Pessoa::all();       
         $celebracao = Celebracao::find($id);     
         $val = $celebracao->quantidade;
+
+      
+
         if(isset($celebracao)){              
             return view('participante.edit', compact('pessoa','celebracao','val'));
         }
