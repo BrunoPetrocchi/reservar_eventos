@@ -21,14 +21,14 @@
   
 
     <div class="col-2">
-      <label for="quantidade">Quantidade de Lugares</label>
-    <input type="text" class="form-control" name="quantidade" id="quantidade"  value="1" readonly>
+      <label for="vagas">Quantidade de Lugares</label>
+    <input type="text" class="form-control" name="vagas" id="vagas"  value="{{ '1'  }}" readonly>
     </div> 
   
   <div class="col-4">
-    <label for="vagas">Lugares Disponíveis </label>
+    <label for="local">Lugares Disponíveis </label>
 
-    <select class="form-control" id="vagas" name="vagas">      
+    <select class="form-control" id="local" name="local">      
       <option>Selecione o Assento</option>
         @for ($i = 1; $i <= $val; $i++)
            <option value="{{ $i }}">N.º :  {{ $i }}  </option>     

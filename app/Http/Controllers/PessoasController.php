@@ -21,6 +21,7 @@ class PessoasController extends Controller
         $pessoa->nome = $request->input('nome');
         $pessoa->sobrenome = $request->input('sobrenome');
         $pessoa->vagas = $request->input('vagas');
+        $pessoa->local = $request->input('local');
         $pessoa->email = $request->input('email');
         $pessoa->telefone = $request->input('telefone');
         //echo '<pre>';        print_r ($pessoa);        echo '</pre>';
@@ -44,9 +45,8 @@ class PessoasController extends Controller
         $pessoa = Pessoa::all();       
         $celebracao = Celebracao::find($id);     
         $val = $celebracao->quantidade;
-
       
-
+     //   echo '<pre>';        print_r ($val);        echo '</pre>';
         if(isset($celebracao)){              
             return view('participante.edit', compact('pessoa','celebracao','val'));
         }
@@ -60,6 +60,7 @@ class PessoasController extends Controller
       
         if(isset($pessoa)){
         $pessoa->celebracao_id = $request->input('celebracao_id');
+        $pessoa->local = $request->input('local');
         $pessoa->vagas = $request->input('vagas');
         $pessoa->nome = $request->input('nome');
         $pessoa->sobrenome = $request->input('sobrenome');

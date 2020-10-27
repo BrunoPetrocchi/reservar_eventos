@@ -10,7 +10,7 @@ class Pessoa extends Model
     use HasFactory;
 
     protected $fillable =[
-        'nome','sobrenome','vagas',
+        'nome','sobrenome','vagas','local',
         'email','telefone','celebracao_id'
     ];
 

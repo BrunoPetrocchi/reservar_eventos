@@ -15,18 +15,22 @@ class CelebracaoController extends Controller
     public function index()
     {
         
-        $celebracao = Celebracao::all();
-      
+       
         $pessoa = DB::table('pessoas')  
          ->select(DB::raw('count(pessoas.celebracao_id) as celeb,
-         pessoas.celebracao_id, celebracaos.id '))
+         pessoas.celebracao_id, celebracaos.id , celebracaos.quantidade as quantidade '))
          ->join('celebracaos', 'pessoas.celebracao_id', '=', 'celebracaos.id')
          ->groupBy('pessoas.celebracao_id')  
          ->get();
       
+        $celebrar = DB::table('celebracaos')
+        ->select('celebracaos.id AS id','pessoas.quantidade as vagas','pessoas.celebracao_id AS pessid', 
+        'celebracaos.*','pessoas.*')
+        ->leftJoin('pessoas', 'celebracaos.id','=','pessoas.celebracao_id')
+        ->get();
         
-       // echo '<pre>';  print_r ($pessoa); echo '</pre>';
-        return view('index', compact('celebracao','pessoa'));
+       //echo '<pre>';  print_r ($celebrar); echo '</pre>';
+        return view('index', compact('pessoa','celebrar'));
     }
 
     

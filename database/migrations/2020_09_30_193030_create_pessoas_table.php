@@ -17,7 +17,8 @@ class CreatePessoasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('celebracao_id')->unsigned();
             $table->foreign('celebracao_id')->references('id')->on('celebracaos');
-            $table->string('vagas');
+            $table->string('quantidade');
+            $table->string('local');
             $table->string('nome');
             $table->string('sobrenome');
             $table->string('email');
