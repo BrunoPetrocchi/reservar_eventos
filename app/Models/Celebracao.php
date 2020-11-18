@@ -12,4 +12,6 @@ class Celebracao extends Model
     protected $fillable =[
         'igreja','horario','quantidade'
     ];
+
+   
 }

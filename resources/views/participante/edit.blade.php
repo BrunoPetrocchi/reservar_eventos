@@ -8,7 +8,8 @@
   <form name="frmreserva" id="frmreserva" action="{{ url('participante')}}" method="POST">
     @csrf
   <div class="row">
-    <input type="text" class="form-control" name="celebracao_id" id="celebracao_id"  value="{{ $celebracao->id }}">
+
+    <input type="text" class="form-control" name="celebracao_id" id="celebracao_id"  value="{{  $celebracao->id}}">
     <div class="col-4">
       <label for="quantidade">Local Celebração</label>
       <input type="text" class="form-control" name="igreja" id="igreja" value="{{  $celebracao->igreja }}" readonly>

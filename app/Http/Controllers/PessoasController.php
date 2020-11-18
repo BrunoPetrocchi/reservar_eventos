@@ -20,7 +20,7 @@ class PessoasController extends Controller
         $pessoa->celebracao_id = $request->input('celebracao_id');
         $pessoa->nome = $request->input('nome');
         $pessoa->sobrenome = $request->input('sobrenome');
-        $pessoa->vagas = $request->input('vagas');
+        $pessoa->quantidade = $request->input('vagas');
         $pessoa->local = $request->input('local');
         $pessoa->email = $request->input('email');
         $pessoa->telefone = $request->input('telefone');
@@ -59,7 +59,6 @@ class PessoasController extends Controller
         $pessoa = Pessoa::find($id);
       
         if(isset($pessoa)){
-        $pessoa->celebracao_id = $request->input('celebracao_id');
         $pessoa->local = $request->input('local');
         $pessoa->vagas = $request->input('vagas');
         $pessoa->nome = $request->input('nome');

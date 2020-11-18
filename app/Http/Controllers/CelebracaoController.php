@@ -15,22 +15,38 @@ class CelebracaoController extends Controller
     public function index()
     {
         
-       
+       // $celebracao = Celebracao::all();
+
+  
+
         $pessoa = DB::table('pessoas')  
-         ->select(DB::raw('count(pessoas.celebracao_id) as celeb,
-         pessoas.celebracao_id, celebracaos.id , celebracaos.quantidade as quantidade '))
+         ->select(DB::raw('count(pessoas.celebracao_id) as celeb, pessoas.celebracao_id'))
          ->join('celebracaos', 'pessoas.celebracao_id', '=', 'celebracaos.id')
-         ->groupBy('pessoas.celebracao_id')  
+         ->groupBy('pessoas.celebracao_id') 
          ->get();
-      
-        $celebrar = DB::table('celebracaos')
-        ->select('celebracaos.id AS id','pessoas.quantidade as vagas','pessoas.celebracao_id AS pessid', 
-        'celebracaos.*','pessoas.*')
-        ->leftJoin('pessoas', 'celebracaos.id','=','pessoas.celebracao_id')
+
+
+        $val_celeb = DB::table('celebracaos')
+        ->select('celebracaos.id AS celeb_id',
+        'celebracaos.igreja AS celeb_igreja',
+        'celebracaos.horario AS celeb_horario',
+        'celebracaos.quantidade AS celeb_quantidade',
+        'pessoas.id as pess_id',
+        'pessoas.celebracao_id',
+        'pessoas.quantidade as pess_quantidade',
+        'pessoas.local as pess_local',
+        'pessoas.nome AS pess_nome', 
+        'pessoas.sobrenome AS pess_sobrenome', 
+        'pessoas.email AS pess_email', 
+        'pessoas.telefone AS pess_telefone'    ) 
+        ->leftJoin('pessoas', 'celebracaos.id','=','pessoas.celebracao_id')  
         ->get();
+
+
         
-       //echo '<pre>';  print_r ($celebrar); echo '</pre>';
-        return view('index', compact('pessoa','celebrar'));
+      // echo '<pre>';  print_r ($pessoa); echo '</pre>';
+     //  echo '<pre>';  print_r ($val_celeb); echo '</pre>';
+        return view('index', compact('val_celeb','pessoa'));
     }
 
     
