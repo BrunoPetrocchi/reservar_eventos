@@ -38,8 +38,9 @@ class CelebracaoController extends Controller
         'pessoas.nome AS pess_nome', 
         'pessoas.sobrenome AS pess_sobrenome', 
         'pessoas.email AS pess_email', 
-        'pessoas.telefone AS pess_telefone'    ) 
+        'pessoas.telefone AS pess_telefone') 
         ->leftJoin('pessoas', 'celebracaos.id','=','pessoas.celebracao_id')  
+        ->groupByRaw('celeb_id')
         ->get();
 
 

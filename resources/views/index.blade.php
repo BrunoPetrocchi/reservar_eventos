@@ -19,22 +19,30 @@
           <div class="card-body">
             
             <blockquote class="blockquote mb-0">
-            {{  $val_celebs->celeb_igreja  }}  <br/> Horário: {{ $val_celebs->celeb_horario }} <br/> 
-            {{-- <?php
+{{-- 
+            <?php
             echo '<pre>';
-            print_r ($pessoa);
+            print_r ($val_celebs);
             echo '</pre>';
           ?>  --}}
-             @foreach ($pessoa as $pessoas) 
+          <p>
+          <strong>Dia e Local: </strong> {{ $val_celebs->celeb_igreja }} 
+          </p>
+          <p>
+            <strong>Horário: </strong> {{ $val_celebs->celeb_horario }} 
+
+          </p>
+
+           @foreach ($pessoa as $pessoas) 
                 @if ( ($pessoas->celebracao_id ) == ($val_celebs->celeb_id ))      
                   @if(($pessoas->celeb) >= ($val_celebs->celeb_quantidade))
                     <strong style="color: red"> Vagas Preenchidas </strong> 
                       @else
-                    Vagas: {{ $pessoas->celeb }} / {{ $val_celebs->celeb_quantidade }} 
+                   <strong> Vagas: </strong>{{ $pessoas->celeb }} / {{ $val_celebs->celeb_quantidade }} 
                   @endif                    
                 @endif    
-              @endforeach 
-              
+              @endforeach  
+          
               <br/><br/>
            
               @if(Auth::check())
@@ -44,18 +52,31 @@
               </a>
               <button type="button" class="btn btn-outline-secondary">Listar Fiéis</button>   
               @endif
-            {{-- <?php
-              echo '<pre>';
-               print_r ($val_celebs);
-              echo '</pre>';
-            ?>         --}}
-            @foreach ($pessoa as $pessoas)
-             
+              
+              @foreach ($pessoa as $pessoas)
+                @if($pessoas->celebracao_id == $val_celebs->celeb_id)
+                <?php  echo '<pre>';  print_r ($pessoas);  print_r ($val_celebs); echo '</pre>';  ?>  
+                 @if ($pessoas->celeb >= $val_celebs->celeb_quantidade)
+                 <a class="nav-link disabled" style="float: right;"disabled >Vagas Preenchidas</a> 
+                 @elseif(($pessoas->celeb <= $val_celebs->celeb_quantidade))
+                 <a href="{{ route('participante.edit', $val_celebs->celeb_id)}}"
+                  class="btn btn-outline-success" style="float: right;">Reservar Lugar</a>   
+                  @if($val_celebs->pess_id == null)
+                  x
+                  @endif
+                 @endif
+              @endif
             @endforeach
+              
             </blockquote>
           </div>
         </div>  
     @endforeach
 </div>
 </div>  
-@endsection
+@endsection 
+
+{{-- <a href="{{ route('participante.edit', $val_celebs->celeb_id)}}"
+  class="btn btn-outline-success" style="float: right;">Reservar Lugar</a>     
+
+  <a class="nav-link disabled" style="float: right;"disabled >Vagas Preenchidas</a>    --}}
