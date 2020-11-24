@@ -14,11 +14,7 @@ class CelebracaoController extends Controller
     
     public function index()
     {
-        
-       // $celebracao = Celebracao::all();
-
-  
-
+       
         $pessoa = DB::table('pessoas')  
          ->select(DB::raw('count(pessoas.celebracao_id) as celeb, pessoas.celebracao_id'))
          ->join('celebracaos', 'pessoas.celebracao_id', '=', 'celebracaos.id')
@@ -42,11 +38,9 @@ class CelebracaoController extends Controller
         ->leftJoin('pessoas', 'celebracaos.id','=','pessoas.celebracao_id')  
         ->groupByRaw('celeb_id')
         ->get();
-
-
         
       // echo '<pre>';  print_r ($pessoa); echo '</pre>';
-     //  echo '<pre>';  print_r ($val_celeb); echo '</pre>';
+      //echo '<pre>';  print_r ($val_celeb); echo '</pre>';
         return view('index', compact('val_celeb','pessoa'));
     }
 

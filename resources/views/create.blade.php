@@ -6,6 +6,7 @@
 <hr/>
   <form name="frmreserva" id="frmreserva" action="{{  url('reserva') }}" method="POST">
     @csrf
+    
   <div class="row">
     <div class="col-6">
         <label for="igreja">Data e Local Celebração</label>
