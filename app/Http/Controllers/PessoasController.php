@@ -24,40 +24,37 @@ class PessoasController extends Controller
         $pessoa->local = $request->input('local');
         $pessoa->email = $request->input('email');
         $pessoa->telefone = $request->input('telefone');
-        //echo '<pre>';        print_r ($pessoa);        echo '</pre>';
+
         $pessoa->save();
         return redirect('participante/'.$pessoa->id);
     }
 
-
     public function show($id)
     {
         $celebracao = Celebracao::all();
-        $pessoa = Pessoa::find($id); 
-          if(isset($pessoa)){      
-            return view('participante.show', compact('pessoa','celebracao',));
+        $pessoa = Pessoa::find($id);
+          if(isset($pessoa)){
+            return view('participante.show', compact('pessoa','celebracao'));
         }
     }
 
-
     public function edit($id)
     {
-        $pessoa = Pessoa::all();       
-        $celebracao = Celebracao::find($id);     
+        $pessoa = Pessoa::all();
+        $celebracao = Celebracao::find($id);
         $val = $celebracao->quantidade;
-      
-     //   echo '<pre>';        print_r ($val);        echo '</pre>';
-        if(isset($celebracao)){              
-            return view('participante.edit', compact('pessoa','celebracao','val'));
+        $ocupados = DB::table('pessoas')->where('local','>',0)->get();
+        //  echo '<pre>';        print_r ($ocupados);        echo '</pre>';
+        if(isset($celebracao)){
+            return view('participante.edit', compact('pessoa','celebracao','val','ocupados'));
         }
             return route('participante.index');
     }
 
- 
     public function update(PessoaRequest $request, $id)
     {
         $pessoa = Pessoa::find($id);
-      
+
         if(isset($pessoa)){
         $pessoa->local = $request->input('local');
         $pessoa->vagas = $request->input('vagas');
@@ -66,7 +63,7 @@ class PessoasController extends Controller
         $pessoa->email = $request->input('email');
         $pessoa->telefone = $request->input('telefone');
         $pessoa->save();
-       
+
         }
         return redirect()->route('reserva.index',compact('pessoa'));
     }
